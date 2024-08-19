@@ -18,6 +18,7 @@ public class App {
             System.out.println("Size: " + size + ", Iterations: " + iterations + ", Time: " + (endTime - startTime) + " ms");
         }
     }
+    //exercício 2
     public static long maxValue(int[] array){
         int max = array[0];
         for(int i = 1; i < array.length; i++){
@@ -28,7 +29,7 @@ public class App {
         }
         return max;
     }
-
+    // exercício 1
     public static int[] mergeSort(int[] array) {
         if (array.length <= 1) {
             return array;
