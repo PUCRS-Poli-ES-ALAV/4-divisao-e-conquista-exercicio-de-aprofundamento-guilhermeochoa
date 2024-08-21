@@ -1,0 +1,16 @@
+Size: 32	Size: 2048	Size: 1048576
+ Iterations mergeSort: 160	 Iterations mergeSort: 22528	 Iterations mergeSort: 20971520
+ Time: 0 ms	 Time: 0 ms	 Time: 246 ms
+		
+Size: 32	Size: 2048	Size: 1048576
+ Iterations maxValue1: 31	 Iterations maxValue1: 2047	 Iterations maxValue1: 1048575
+ Time: 0 ms	 Time: 0 ms	 Time: 8 ms
+		
+Size: 32	Size: 2048	Size: 1048576
+ Iterations maxValue2: 16	 Iterations maxValue2: 1024	 Iterations maxValue2: 524288
+ Time: 0 ms	 Time: 0 ms	 Time: 4 ms
+		
+Bits: 4	Bits: 16	Bits: 64
+ Iterations Multipy: 16	 Iterations Multipy: 256	 Iterations Multipy: 4096
+ Time: 0 ms	 Time: 0 ms	 Time: 0 ms
+ Result: 143	 Result: 660608508	 Result: 0
