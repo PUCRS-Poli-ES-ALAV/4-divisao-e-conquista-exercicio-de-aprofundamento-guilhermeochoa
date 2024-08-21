@@ -2,6 +2,7 @@ package br.pucrs;
 
 import java.util.Arrays;
 import java.util.Random;
+import static java.lang.Math.max;
 
 public class App {
     private static long iterations = 0;
@@ -12,14 +13,62 @@ public class App {
             int[] array = generateRandomArray(size);
             long startTime = System.currentTimeMillis();
             iterations = 0;
-            //mergeSort(array);
-            maxValue(array);
+            mergeSort(array);
+            //maxValue1(array);
+           // maxValue2(array,0,array.length-1);
             long endTime = System.currentTimeMillis();
-            System.out.println("Size: " + size + ", Iterations: " + iterations + ", Time: " + (endTime - startTime) + " ms");
+            System.out.println("Size: " + size + ", Iterations mergeSort: " + iterations + ", Time: " + (endTime - startTime) + " ms");
+        }
+        for (int size : sizes) {
+            int[] array = generateRandomArray(size);
+            long startTime = System.currentTimeMillis();
+            iterations = 0;
+            //mergeSort(array);
+            maxValue1(array);
+            //maxValue2(array,0,array.length-1);
+            long endTime = System.currentTimeMillis();
+            System.out.println("Size: " + size + ", Iterations maxValue1: " + iterations + ", Time: " + (endTime - startTime) + " ms");
+        }
+        for (int size : sizes) {
+            int[] array = generateRandomArray(size);
+            long startTime = System.currentTimeMillis();
+            iterations = 0;
+            //mergeSort(array);
+            //maxValue1(array);
+            maxValue2(array,0,array.length-1);
+            long endTime = System.currentTimeMillis();
+            System.out.println("Size: " + size + ", Iterations maxValue2: " + iterations + ", Time: " + (endTime - startTime) + " ms");
+        }
+        int[] bitSizes = {4, 16, 64};
+        Random random = new Random();
+        for (int bits : bitSizes) {
+            long x = random.nextLong() & ((1L << bits) - 1);
+            long y = random.nextLong() & ((1L << bits) - 1);
+            long startTime = System.currentTimeMillis();
+            iterations = 0;
+            long result = multiply(x, y, bits);
+            long endTime = System.currentTimeMillis();
+            System.out.println("Bits: " + bits + ", Iterations Multipy: " + iterations + ", Time: " + (endTime - startTime) + " ms, Result: " + result);
         }
     }
-    //exercício 2
-    public static long maxValue(int[] array){
+    public static long multiply(long x, long y, int n) {
+        if (n == 1) {
+            iterations++;
+            return x * y;
+        } else {
+            int m = (n + 1) / 2;
+            long a = x >> m;
+            long b = x & ((1L << m) - 1);
+            long c = y >> m;
+            long d = y & ((1L << m) - 1);
+            long e = multiply(a, c, m);
+            long f = multiply(b, d, m);
+            long g = multiply(b, c, m);
+            long h = multiply(a, d, m);
+            return (e << (2 * m)) + ((g + h) << m) + f;
+        }
+    }
+    public static long maxValue1(int[] array){
         int max = array[0];
         for(int i = 1; i < array.length; i++){
             iterations++;
@@ -29,7 +78,19 @@ public class App {
         }
         return max;
     }
-    // exercício 1
+    public static long maxValue2(int[] A,int init, int end){
+        if (end - init <= 1){
+            iterations++;
+            return max(A[init],A[end]);
+        }
+        else {
+            int m = (init + end)/2;
+            long v1 = maxValue2(A,init,m);
+            long v2 = maxValue2(A,m+1,end);
+            return max(v1,v2);
+        }
+    }
+
     public static int[] mergeSort(int[] array) {
         if (array.length <= 1) {
             return array;
